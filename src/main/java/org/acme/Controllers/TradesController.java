@@ -23,11 +23,18 @@ public class TradesController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
-    public void addNewTrades(Trade trade) /*throws MerchantNotExistException*/{
+    public String addNewTrades(Trade trade) /*throws MerchantNotExistException*/{
         // if(false){
         //     throw new MerchantNotExistException;
         // }
-        tradesService.addTrade(trade);
+        Boolean rt = tradesService.checkCustomer(trade.getCustomerId());
+        if(!rt){
+            return "customer with id "+trade.getCustomerId()+" is unknown";
+        }
+        else{
+            tradesService.addTrade(trade);
+            return null;
+        }
 
     }
 
@@ -36,4 +43,6 @@ public class TradesController {
     public List<Trade> getAllTrades(){
         return tradesService.getAllTrades();
     }
+
+
 }
