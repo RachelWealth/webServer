@@ -56,11 +56,6 @@ public class CallBankAuthService {
         }
         return usersAccount;
     }
-
-    public CallBankAuthService() throws BankServiceException_Exception{
-        
-            
-    }
     /**
      * MUST DO, to make sure we can reuse the bank account in our test
      * @throws BankServiceException_Exception
@@ -73,9 +68,14 @@ public class CallBankAuthService {
     }
    
     public Boolean validAccount(String id) throws BankServiceException_Exception{
-        Account rt =bank.getAccount(id);
-        System.out.println(rt);
-        return true;
+        try{
+            Account rt =bank.getAccount(id);
+            System.out.println(rt);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+        
     }
     
 }

@@ -31,15 +31,25 @@ public class DtuPayRegUserController {
         return dtuPayUserService.addNewDtuPayUser(dtuPayUser);
     }
 
-    @GET
-    @Path("/createnewusers")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<String> createNewBankAccount() throws BankServiceException_Exception{
+     /*************DO NOT CALL this ANY MORE *******************/
+    // @GET
+    // @Path("/createnewusers")
+    // @Produces(MediaType.APPLICATION_JSON)
+    // public List<String> createNewBankAccount() throws BankServiceException_Exception{
+    //     CallBankAuthService bank = new CallBankAuthService();
+    //     List<String> rt = bank.CreateAccount();
+    //     return rt;
+    // }
+    
+    @POST
+    @Path("/validAccount")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String validAccountExample(String accountId) throws BankServiceException_Exception{
         CallBankAuthService bank = new CallBankAuthService();
-        List<String> rt = bank.CreateAccount();
-        return rt;
+        return String.valueOf(bank.validAccount(accountId));
     }
-
+    
 
 
 }
