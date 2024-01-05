@@ -24,9 +24,6 @@ public class TradesController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
     public String addNewTrades(Trade trade) /*throws MerchantNotExistException*/{
-        // if(false){
-        //     throw new MerchantNotExistException;
-        // }
         Boolean rt = tradesService.checkCustomer(trade.getCustomerId());
         if(!rt){
             return "customer with id "+trade.getCustomerId()+" is unknown";
@@ -35,7 +32,6 @@ public class TradesController {
             tradesService.addTrade(trade);
             return null;
         }
-
     }
 
     @GET
