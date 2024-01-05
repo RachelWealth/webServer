@@ -4,6 +4,7 @@ public class Person {
     private String name;
     
     private String address;
+    private String cprNo;
     public String getName() {
         return name;
     }
@@ -22,8 +23,17 @@ public class Person {
 
     public Person(){
     }
-    public Person(String name,String address){
+    public Person(String name,String address, String cprNo){
         this.name=name;
         this.address=address;
+        this.cprNo = cprNo;
+    }
+
+    public String getCprNo() {
+        return cprNo;
+    }
+
+    public void setCprNo(String cprNo) {
+        this.cprNo = cprNo;
     }
 }

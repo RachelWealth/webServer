@@ -1,39 +1,28 @@
 package org.acme.Controllers;
 
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import org.acme.Models.Customer;
-import org.acme.Services.CallBankAuthService;
+import org.acme.Models.DtuPayUser;
 import org.acme.Services.CustomersService;
 
-import dtu.ws.fastmoney.BankServiceException_Exception;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
+import java.util.List;
 
-@Path("/customer")
+@Path("/dtupaycustomer")
 public class CustomerController {
-    CustomersService customersService = new CustomersService();
-    
+    private CustomersService customersService = new CustomersService();
     @GET
-    @Path("/register/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String createNewCustomer(@PathParam("id") String id){
-        return "test";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Customer> listRegDtuPayUser(){
+        return customersService.getAllCustomers();
     }
-    /*
-     * Here only used for test
-     */
-    
+
     @POST
-    @Path("/{id}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Boolean validUserAccount(@PathParam("id") String id) throws BankServiceException_Exception{
-        CallBankAuthService bService = new CallBankAuthService();
-        return bService.validAccount(id);
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String regDtuPayUser(Customer customer){
+        int result = customersService.addNewDtuPayUser(customer);
+        if (result>0) return String.valueOf(result);
+        else return "User is not found or No bank Account found";
     }
 }

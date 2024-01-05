@@ -7,15 +7,9 @@ import java.util.List;
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
 
-import io.netty.handler.codec.ByteToMessageDecoder.Cumulator;
-
 public class TradesService {
     List<Trade> trades = new ArrayList<>(Arrays.asList(
-        new Trade("1", "Yingli","101 coffee bar",32),
-        new Trade("2","Tama","202 canteen",30),
-        new Trade("3","Jiahe","101 canteen",50),
-        new Trade("4","Siyuan","202 coffee bar",55),
-        new Trade("5","Xinyi","202 canteen",45)
+        new Trade( "Yingli",1500.0,"101 coffee bar",2500.0,300.0)
     ));
     CustomersService customersService = new CustomersService();
     private int total=5;
@@ -26,11 +20,14 @@ public class TradesService {
     // public int getTotal(){
     //     return this.total;
     // }
-    public void addTrade(Trade trade){
-        addTotal();
-        Trade newTrade = new Trade(String.valueOf(this.total),trade.getCustomerId(),trade.getMerchantId(),trade.getPrice());
+    public List<Trade> addTrade(Trade trade){
+        Double currentBalanceC = customersService.getCustomerAccountBalance(trade.getCustomerBankAccount()) - trade.getBalance();
+        Double currentBalanceM = customersService.getCustomerAccountBalance(trade.getCustomerBankAccount())+ trade.getBalance();
+        Trade newTrade = new Trade(trade.getCustomerBankAccount(),currentBalanceC,trade.getMerchantBankAccount(),currentBalanceM,trade.getBalance());
         trades.add(newTrade);
-        this.addTotal();
+        customersService.changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
+        customersService.changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceM);
+        return getAllTrades();
     }
 
     public List<Trade> getAllTrades(){
@@ -45,5 +42,8 @@ public class TradesService {
             return true;
         }
     }
-    
+
+    public List<Trade> getAllRegUser() {
+        return trades;
+    }
 }

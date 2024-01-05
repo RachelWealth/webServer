@@ -5,6 +5,7 @@ import java.util.List;
 
 // import org.acme.Exceptions.MerchantNotExistException;
 import org.acme.Models.Trade;
+import org.acme.Services.CustomersService;
 import org.acme.Services.TradesService;
 
 import jakarta.ws.rs.Consumes;
@@ -19,19 +20,13 @@ public class TradesController {
     
     //private static final Exception MerchantNotExistException = null;
     private TradesService tradesService = new TradesService();
+    private CustomersService customersService = new CustomersService();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces("text/plain")
-    public String addNewTrades(Trade trade) /*throws MerchantNotExistException*/{
-        Boolean rt = tradesService.checkCustomer(trade.getCustomerId());
-        if(!rt){
-            return "customer with id "+trade.getCustomerId()+" is unknown";
-        }
-        else{
-            tradesService.addTrade(trade);
-            return null;
-        }
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Trade> addNewTrades(Trade trade) /*throws MerchantNotExistException*/{
+        return tradesService.addTrade(trade);
     }
 
     @GET
@@ -39,6 +34,5 @@ public class TradesController {
     public List<Trade> getAllTrades(){
         return tradesService.getAllTrades();
     }
-
 
 }

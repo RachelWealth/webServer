@@ -8,7 +8,7 @@ import org.acme.Models.Person;
 public class PersonResourceService {
     private List<Person> resources =new ArrayList<>(
             Arrays.asList(
-                new Person("Yingli","DTU")
+                new Person("Yingli","DTU","cprOfYingli")
             )
         );
     public List<Person> getAllPersonResouce(){

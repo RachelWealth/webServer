@@ -1,44 +1,51 @@
 package org.acme.Models;
 
 public class Trade {
-    private String id;
-    private String customerId;
-    private String merchantId;
-    
-    private int price;
+    private String customerBankAccount;
+    private String merchantBankAccount;
+    private Double balance;
+    private Double customerBalance;
+    private Double merchantBalance;
     public Trade(){}
-    public Trade(String id, String customerId, String merchantId, int price) {
-        this.customerId = customerId;
-        this.merchantId = merchantId;
-        this.id = id;
-        this.price = price;
+    public Trade(String customerBankAccount,Double customerBalance, String merchantBankAccount,Double merchantBalance, Double balance) {
+        this.customerBankAccount = customerBankAccount;
+        this.customerBalance = customerBalance;
+        this.merchantBalance = merchantBalance;
+        this.merchantBankAccount = merchantBankAccount;
+        this.balance = balance;
     }
-    public String getCustomerId() {
-        return customerId;
+    public String getCustomerBankAccount() {
+        return customerBankAccount;
     }
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomerBankAccount(String customerBankAccount) {
+        this.customerBankAccount = customerBankAccount;
     }
-    public String getMerchantId() {
-        return merchantId;
+    public String getMerchantBankAccount() {
+        return merchantBankAccount;
     }
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+    public void setMerchantBankAccount(String merchantBankAccount) {
+        this.merchantBankAccount = merchantBankAccount;
     }
-    public String getId() {
-        return id;
+    public Double getBalance() {
+        return balance;
     }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public int getPrice() {
-        return price;
-    }
-    public void setPrice(int price) {
-        this.price = price;
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
+    public Double getCustomerBalance() {
+        return customerBalance;
+    }
 
+    public void setCustomerBalance(Double customerBalance) {
+        this.customerBalance = customerBalance;
+    }
 
+    public Double getMerchantBalance() {
+        return merchantBalance;
+    }
 
+    public void setMerchantBalance(Double merchantBalance) {
+        this.merchantBalance = merchantBalance;
+    }
 }
