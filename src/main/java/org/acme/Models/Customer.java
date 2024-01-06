@@ -30,6 +30,14 @@ public class Customer {
         this.userType= userType;
     }
 
+    public Customer(String name,String cpr,String bankAccount,String userType){
+        this.cpr = cpr;
+        this.name = name;
+
+        this.bankAccount = bankAccount;
+        this.userType= userType;
+    }
+
     public Double getBalance() {
         return balance;
     }
