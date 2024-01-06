@@ -10,10 +10,11 @@ import org.acme.Models.DtuPayUser;
 
 public class CustomersService {
     List<Customer> customers = new ArrayList<>(Arrays.asList(
-            new Customer(1,"Yingli","cprnoYingli",1000.00,"account_noYingli","customer"),
-            new Customer(2,"Tama","cprnoTama",1000.00,"account_noTama","customer"),
-            new Customer(3,"Siyuan","cprnoSiyuan",1000.00,"account_noSiyuan","customer"),
-            new Customer(4,"Jiahe","cprnoJiahe",1000.00,"account_noJiahe","customer"),                new Customer(5,"Xinyi","cprnoXinyi",1000.00,"account_noXinyi","customer")
+            new Customer(1,"Yingli","Lastname","cprnoYingli",1000.00,"account_noYingli","customer"),
+            new Customer(2,"Tama","Lastname","cprnoTama",1000.00,"account_noTama","customer"),
+            new Customer(3,"Siyuan","Lastname","cprnoSiyuan",1000.00,"account_noSiyuan","customer"),
+            new Customer(4,"Jiahe","Lastname","cprnoJiahe",1000.00,"account_noJiahe","customer"),
+            new Customer(5,"Lastname","Xinyi","cprnoXinyi",1000.00,"account_noXinyi","customer")
     ));
 
 

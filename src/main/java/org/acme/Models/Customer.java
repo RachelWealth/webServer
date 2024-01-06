@@ -2,25 +2,29 @@ package org.acme.Models;
 
 public class Customer {
     private  int id;
-    private  String name;
+    private  String firstName;
+    private  String lastName;
     private  String cpr;
     private  Double balance;
     private  String bankAccount;
     private  String userType;
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Customer(){}
 
-    public Customer(int id,String name,String cpr, Double balance, String bankAccount,String userType){
+    public Customer(int id,String firstName,String lastName,String cpr, Double balance, String bankAccount,String userType){
         this.id = id;
         this.cpr = cpr;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.balance = balance;
+        this.bankAccount = bankAccount;
+        this.userType= userType;
+    }
+    public Customer(String firstName,String lastName,String cpr, Double balance, String bankAccount,String userType){
+        this.cpr = cpr;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.balance = balance;
         this.bankAccount = bankAccount;
         this.userType= userType;
@@ -72,5 +76,21 @@ public class Customer {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

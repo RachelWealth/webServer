@@ -3,6 +3,7 @@ import dtu.ws.fastmoney.BankServiceException_Exception;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
+import org.acme.Models.BankUser;
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
 import org.acme.Services.CallBankAuthService;
@@ -14,6 +15,17 @@ import java.util.List;
 @Path("/")
 public class GeneralController {
     private GeneralServices generalServices = new GeneralServices();
+    @Path("/bank")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String regBankUser(Customer customer) throws BankServiceException_Exception {
+        String bAccNo = generalServices.addNewBankUser(customer);
+        if (!bAccNo.isEmpty())
+            return "Bank Account number =" + bAccNo;
+
+        else return "No bank Account Created!!!";
+    }
     @Path("/customers")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -30,7 +42,7 @@ public class GeneralController {
         if (result>0)
             return String.valueOf(result);
 
-        else return "User is not found or No bank Account found";
+        else return "User is not Created";
     }
 
    //Trading Controllers
