@@ -68,12 +68,12 @@ public class GeneralServices {
         public List<Trade> addTrade(Trade trade) throws BankServiceException_Exception {
 
             if (callBankAuthService.validAccount(trade.getCustomerBankAccount()) && callBankAuthService.validAccount(trade.getMerchantBankAccount())){
-                Double currentBalanceC = getBalance(trade.getCustomerBankAccount()).doubleValue() - trade.getBalance();
-                Double currentBalanceM = getBalance(trade.getMerchantBankAccount()).doubleValue()+ trade.getBalance();
+                callBankAuthService.transferMoneyFromTo(trade.getMerchantBankAccount(),trade.getCustomerBankAccount(),trade.getBalance(),"Transfered Money");
+                Double currentBalanceC = getBalance(trade.getCustomerBankAccount()).doubleValue();
+                Double currentBalanceM = getBalance(trade.getMerchantBankAccount()).doubleValue();
                 Trade newTrade = new Trade(trade.getCustomerBankAccount(),currentBalanceC,trade.getMerchantBankAccount(),currentBalanceM,trade.getBalance());
                 trades.add(newTrade);
-                callBankAuthService.transferMoneyFromTo(trade.getMerchantBankAccount(),trade.getCustomerBankAccount(),trade.getBalance(),"Transfered Money");
-//                changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
+                changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
 //                changeAccountBalance(trade.getMerchantBankAccount(), currentBalanceM);
                 return getAllTrades();
             }
@@ -94,7 +94,7 @@ public class GeneralServices {
         return rt;
     }
 
-    
+
     public void deleteAccount(String accoutId) throws BankServiceException_Exception{
         callBankAuthService.deleteAccount(accoutId);
     }
