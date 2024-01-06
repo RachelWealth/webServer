@@ -70,7 +70,9 @@ public class CallBankAuthService {
      * @return
      * @throws BankServiceException_Exception
      */
-    
+
+
+     
     public String CreateOneAccount(Customer customer) throws BankServiceException_Exception{
         User bankUser = new User();
         bankUser.setCprNumber(customer.getCpr());
