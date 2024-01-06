@@ -5,6 +5,7 @@ import org.acme.Models.BankUser;
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,5 +84,11 @@ public class GeneralServices {
 
     public String addNewBankUser(Customer customer) throws BankServiceException_Exception {
             return callBankAuthService.CreateOneAccount(customer);
+    }
+
+    public BigDecimal getBalance(String accountId) throws BankServiceException_Exception{
+        BigDecimal rt = callBankAuthService.checkBalance(accountId);
+        System.out.println(rt);
+        return rt
     }
 }
