@@ -34,6 +34,7 @@ public class GeneralController {
         return generalServices.getAllCustomers();
     }
 
+    
     @Path("/customers")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -59,6 +60,8 @@ public class GeneralController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Trade> addNewTrades(Trade trade) {
+//        String debotor=trade.getCustomerBankAccount();
+//        String creditor=trade.getMerchantBankAccount();
         try {
            return generalServices.addTrade(trade);
         } catch (BankServiceException_Exception e) {
