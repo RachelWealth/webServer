@@ -9,6 +9,7 @@ import org.acme.Models.Trade;
 import org.acme.Services.CallBankAuthService;
 import org.acme.Services.GeneralServices;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -58,12 +59,27 @@ public class GeneralController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Trade> addNewTrades(Trade trade) {
-        String debotor=trade.getCustomerBankAccount();
-        String creditor=trade.getMerchantBankAccount();
+//        String debotor=trade.getCustomerBankAccount();
+//        String creditor=trade.getMerchantBankAccount();
         try {
            return generalServices.addTrade(trade);
         } catch (BankServiceException_Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    @Path("/getbalance")
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public BigDecimal getBalance(String accoundId) throws BankServiceException_Exception{
+        return generalServices.getBalance(accoundId);
+    }
+    @Path("/deleteaccount")
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    public void deleteAccount(String accoundId) throws BankServiceException_Exception{
+        generalServices.deleteAccount(accoundId);
     }
 }
