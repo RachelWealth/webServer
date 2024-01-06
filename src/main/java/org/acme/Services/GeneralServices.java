@@ -68,12 +68,13 @@ public class GeneralServices {
         public List<Trade> addTrade(Trade trade) throws BankServiceException_Exception {
 
             if (callBankAuthService.validAccount(trade.getCustomerBankAccount()) && callBankAuthService.validAccount(trade.getMerchantBankAccount())){
-                callBankAuthService.transferMoneyFromTo(trade.getMerchantBankAccount(),trade.getCustomerBankAccount(),trade.getBalance(),"Transfered Money");
-                Double currentBalanceC = getBalance(trade.getCustomerBankAccount()).doubleValue();
+                callBankAuthService.transferMoneyFromTo(trade.getCustomerBankAccount(),trade.getMerchantBankAccount(),trade.getBalance(),"Transfered Money");
+              
+                Double currentBalanceC = getBalance(trade.getCustomerBankAccount()).doubleValue() ;
                 Double currentBalanceM = getBalance(trade.getMerchantBankAccount()).doubleValue();
                 Trade newTrade = new Trade(trade.getCustomerBankAccount(),currentBalanceC,trade.getMerchantBankAccount(),currentBalanceM,trade.getBalance());
                 trades.add(newTrade);
-                changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
+                  changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
 //                changeAccountBalance(trade.getMerchantBankAccount(), currentBalanceM);
                 return getAllTrades();
             }
