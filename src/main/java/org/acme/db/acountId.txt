@@ -1,4 +1,4 @@
-[
+Account for every users [
     "db58c71a-087c-4dc5-914d-183298af6f7b",
     "4f7c3f75-872c-456a-83ad-0917a0f9b725",
     "8cd7b217-0cfb-4b7f-989f-bddd0f1303e2",
@@ -9,10 +9,9 @@
 ]
 
 new BankUser("cprnoYingli", "Yingli", "Duan"),
-        new BankUser("cprnoTama","Tama","Sarker"),
-        new BankUser("cprnoSiyuan","Siyuan","Liu"),
-
-        new BankUser("CPR202CB", "202 coffee","bar"),
-        new BankUser("CPR101CB", "101 coffee"," bar"),
-        new BankUser("CPRCT","202 ", "canteen"),
-        new BankUser("CPR101CT","101", "canteen")
+new BankUser("cprnoTama","Tama","Sarker"),
+new BankUser("cprnoSiyuan","Siyuan","Liu"),
+new BankUser("CPR202CB", "202 coffee","bar"),
+new BankUser("CPR101CB", "101 coffee"," bar"),
+new BankUser("CPRCT","202 ", "canteen"),
+new BankUser("CPR101CT","101", "canteen")
