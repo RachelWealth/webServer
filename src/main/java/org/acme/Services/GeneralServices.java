@@ -91,6 +91,8 @@ public class GeneralServices {
         System.out.println(rt);
         return rt;
     }
+
+    
     public void deleteAccount(String accoutId) throws BankServiceException_Exception{
         callBankAuthService.deleteAccount(accoutId);
     }

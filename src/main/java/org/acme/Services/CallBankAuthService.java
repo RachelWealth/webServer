@@ -129,4 +129,19 @@ public class CallBankAuthService {
         Account rt = bank.getAccount(accountId);
         return rt.getBalance();
     }
+
+
+
+    
+    /**
+     * 
+     * @param accountId
+     * @return
+     * @throws BankServiceException_Exception
+     */
+    public void deleteAccount(String accountId) throws BankServiceException_Exception{
+        bank.retireAccount(accountId);
+        
+    }
+
 }
