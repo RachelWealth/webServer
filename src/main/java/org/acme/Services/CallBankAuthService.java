@@ -13,6 +13,7 @@ import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
 import org.acme.Models.BankUser;
+import org.acme.Models.Customer;
 
 public class CallBankAuthService {
     BankService bank= new BankServiceService().getBankServicePort();
@@ -28,7 +29,10 @@ public class CallBankAuthService {
         new BankUser("CPRCT","202 ", "canteen"),
         new BankUser("CPR101CT","101", "canteen")
     ));
-    
+    /**
+     * 
+     * @return
+     */
     private List<User> getUsers(){
         Iterator<BankUser> it = cfakeAccount.iterator();
         List<User> newUsers = new ArrayList<>(Arrays.asList());
@@ -42,8 +46,12 @@ public class CallBankAuthService {
         }
         return newUsers;
     }
-
-    public List<String> CreateAccount()throws BankServiceException_Exception{
+    /**
+     * 
+     * @return
+     * @throws BankServiceException_Exception
+     */
+    public List<String> CreateALLAccount()throws BankServiceException_Exception{
         List<User> newUsers = this.getUsers();
         Iterator<User> it = newUsers.iterator();
         List<User> rt = new ArrayList<>(Arrays.asList());
@@ -57,6 +65,21 @@ public class CallBankAuthService {
         return usersAccount;
     }
     /**
+     * Create bank account for new customer
+     * @param customer
+     * @return
+     * @throws BankServiceException_Exception
+     */
+    public String CreateOneAccount(Customer customer) throws BankServiceException_Exception{
+        User bankUser = new User();
+        bankUser.setCprNumber(customer.getCpr());
+        bankUser.setFirstName(customer.getFirstName());
+        bankUser.setLastName(customer.getLastName());
+        BigDecimal balance = new BigDecimal(customer.getBalance());
+        String accountId = bank.createAccountWithBalance(bankUser, balance); 
+        return accountId;
+    }
+    /**
      * MUST DO, to make sure we can reuse the bank account in our test
      * @throws BankServiceException_Exception
      */
@@ -67,6 +90,12 @@ public class CallBankAuthService {
         }
     }
    
+    /***
+     * Valid if the user bank account is 
+     * @param id
+     * @return
+     * @throws BankServiceException_Exception
+     */
     public Boolean validAccount(String id) throws BankServiceException_Exception{
         try{
             Account rt =bank.getAccount(id);
@@ -75,7 +104,28 @@ public class CallBankAuthService {
         }catch(Exception e){
             return false;
         }
-        
+    }
+    /***
+     * 
+     * @param debtor
+     * @param creditor
+     * @param amount
+     * @param desc
+     * @throws BankServiceException_Exception
+     */
+    public void transferMoneyFromTo(String debtor, String creditor, Double amount, String desc) throws BankServiceException_Exception{
+        BigDecimal bigAmount = new BigDecimal(amount);
+        bank.transferMoneyFromTo(debtor,creditor,bigAmount,desc);
+    }
+    /**
+     * 
+     * @param accountId
+     * @return
+     * @throws BankServiceException_Exception
+     */
+    public BigDecimal checkBalance(String accountId) throws BankServiceException_Exception{
+        Account rt = bank.getAccount(accountId);
+        return rt.getBalance();
     }
     
 }

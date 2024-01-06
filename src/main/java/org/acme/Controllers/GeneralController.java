@@ -4,7 +4,9 @@ import jakarta.ws.rs.core.MediaType;
 
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
+import org.acme.Services.CallBankAuthService;
 import org.acme.Services.GeneralServices;
+import org.eclipse.persistence.queries.Call;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class GeneralController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String regDtuPayUser(Customer customer){
+
         int result = generalServices.addNewDtuPayUser(customer);
         if (result>0) return String.valueOf(result);
         else return "User is not found or No bank Account found";
@@ -42,6 +45,7 @@ public class GeneralController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Trade> addNewTrades(Trade trade) {
+ 
         return generalServices.addTrade(trade);
     }
 }
