@@ -1,8 +1,10 @@
-package org.acme;
+package org.acme.Controllers;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
+import org.acme.Services.GeneralServices;
 
 import java.util.List;
 
