@@ -129,5 +129,4 @@ public class CallBankAuthService {
         Account rt = bank.getAccount(accountId);
         return rt.getBalance();
     }
-    
 }
