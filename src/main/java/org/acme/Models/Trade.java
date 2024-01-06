@@ -14,6 +14,11 @@ public class Trade {
         this.merchantBankAccount = merchantBankAccount;
         this.balance = balance;
     }
+    public Trade(String customerBankAccount, String merchantBankAccount,Double balance) {
+        this.customerBankAccount = customerBankAccount;
+        this.merchantBankAccount = merchantBankAccount;
+        this.balance = balance;
+    }
     public String getCustomerBankAccount() {
         return customerBankAccount;
     }
