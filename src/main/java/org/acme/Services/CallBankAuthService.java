@@ -72,7 +72,7 @@ public class CallBankAuthService {
      */
 
 
-     
+
     public String CreateOneAccount(Customer customer) throws BankServiceException_Exception{
         User bankUser = new User();
         bankUser.setCprNumber(customer.getCpr());
@@ -86,11 +86,10 @@ public class CallBankAuthService {
      * MUST DO, to make sure we can reuse the bank account in our test
      * @throws BankServiceException_Exception
      */
-    public void retireBankAccount() throws BankServiceException_Exception{
-        Iterator<String> it = usersAccount.iterator();
-        while(it.hasNext()){
-            bank.retireAccount(it.next());
-        }
+    public void retireBankAccount(String accountId) throws BankServiceException_Exception{
+       
+            bank.retireAccount(accountId);
+       
     }
    
     /***

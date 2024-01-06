@@ -76,4 +76,10 @@ public class GeneralController {
     public BigDecimal getBalance(String accoundId) throws BankServiceException_Exception{
         return generalServices.getBalance(accoundId);
     }
+    @Path("/deleteaccount")
+    @POST
+    @Consumes(MediaType.TEXT_PLAIN)
+    public void deleteAccount(String accoundId) throws BankServiceException_Exception{
+        generalServices.deleteAccount(accoundId);
+    }
 }

@@ -89,6 +89,9 @@ public class GeneralServices {
     public BigDecimal getBalance(String accountId) throws BankServiceException_Exception{
         BigDecimal rt = callBankAuthService.checkBalance(accountId);
         System.out.println(rt);
-        return rt
+        return rt;
+    }
+    public void deleteAccount(String accountId) throws BankServiceException_Exception{
+        callBankAuthService.retireBankAccount(accountId);
     }
 }
