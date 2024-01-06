@@ -45,7 +45,7 @@ public interface BankService {
     /**
      * 
      * @param balance
-     * @param bankUser
+     * @param user
      * @return
      *     returns java.lang.String
      * @throws BankServiceException_Exception
@@ -56,7 +56,7 @@ public interface BankService {
     @ResponseWrapper(localName = "createAccountWithBalanceResponse", targetNamespace = "http://fastmoney.ws.dtu/", className = "dtu.ws.fastmoney.CreateAccountWithBalanceResponse")
     public String createAccountWithBalance(
         @WebParam(name = "user", targetNamespace = "")
-        User bankUser,
+        User user,
         @WebParam(name = "balance", targetNamespace = "")
         BigDecimal balance)
         throws BankServiceException_Exception

@@ -10,7 +10,7 @@ import org.acme.Services.RegDtuPayUserService;
 import java.util.List;
 
 @Path("/dtupayreg")
-public class dtuPayRegUserController {
+public class DtuPayRegUserController {
     private RegDtuPayUserService dtuPayUserService = new RegDtuPayUserService();
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -1,9 +1,11 @@
 package org.acme.Controllers;
+import dtu.ws.fastmoney.BankServiceException_Exception;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import org.acme.Models.Customer;
 import org.acme.Models.Trade;
+import org.acme.Services.CallBankAuthService;
 import org.acme.Services.GeneralServices;
 
 import java.util.List;
@@ -23,9 +25,11 @@ public class GeneralController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String regDtuPayUser(Customer customer){
+    public String regDtuPayUser(Customer customer) throws BankServiceException_Exception {
         int result = generalServices.addNewDtuPayUser(customer);
-        if (result>0) return String.valueOf(result);
+        if (result>0)
+            return String.valueOf(result);
+
         else return "User is not found or No bank Account found";
     }
 
@@ -42,6 +46,12 @@ public class GeneralController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Trade> addNewTrades(Trade trade) {
-        return generalServices.addTrade(trade);
+        String debotor=trade.getCustomerBankAccount();
+        String creditor=trade.getMerchantBankAccount();
+        try {
+           return generalServices.addTrade(trade);
+        } catch (BankServiceException_Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

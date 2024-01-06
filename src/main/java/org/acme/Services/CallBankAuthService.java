@@ -17,18 +17,18 @@ import org.acme.Models.BankUser;
 public class CallBankAuthService {
     BankService bank= new BankServiceService().getBankServicePort();
     List<String> usersAccount =  new ArrayList<>(Arrays.asList());
-    
-    List<BankUser> cfakeAccount = new ArrayList<>(Arrays.asList(
-        new BankUser("cprnoYingli", "Yingli", "Duan"),
-        new BankUser("cprnoTama","Tama","Sarker"),
-        new BankUser("cprnoSiyuan","Siyuan","Liu"),
 
-        new BankUser("CPR202CB", "202 coffee","bar"),
-        new BankUser("CPR101CB", "101 coffee"," bar"),
-        new BankUser("CPRCT","202 ", "canteen"),
-        new BankUser("CPR101CT","101", "canteen")
+    List<BankUser> cfakeAccount = new ArrayList<>(Arrays.asList(
+            new BankUser("cprnoYingli", "Yingli", "Duan"),
+            new BankUser("cprnoTama","Tama","Sarker"),
+            new BankUser("cprnoSiyuan","Siyuan","Liu"),
+
+            new BankUser("CPR202CB", "202 coffee","bar"),
+            new BankUser("CPR101CB", "101 coffee"," bar"),
+            new BankUser("CPRCT","202 ", "canteen"),
+            new BankUser("CPR101CT","101", "canteen")
     ));
-    
+
     private List<User> getUsers(){
         Iterator<BankUser> it = cfakeAccount.iterator();
         List<User> newUsers = new ArrayList<>(Arrays.asList());
@@ -50,7 +50,7 @@ public class CallBankAuthService {
         while(it.hasNext()){
             User bankUser = it.next();
             BigDecimal balance = new BigDecimal(1000.0);
-            String user = bank.createAccountWithBalance(bankUser, balance); 
+            String user = bank.createAccountWithBalance(bankUser, balance);
             System.out.println(user);
             usersAccount.add(user);
         }
@@ -66,7 +66,7 @@ public class CallBankAuthService {
             bank.retireAccount(it.next());
         }
     }
-   
+
     public Boolean validAccount(String id) throws BankServiceException_Exception{
         try{
             Account rt =bank.getAccount(id);
@@ -75,7 +75,10 @@ public class CallBankAuthService {
         }catch(Exception e){
             return false;
         }
-        
     }
-    
+    public void transferMoneyFromTo(String debtor, String creditor, Double amount, String desc) throws BankServiceException_Exception{
+        BigDecimal bigAmount = new BigDecimal(amount);
+        bank.transferMoneyFromTo(debtor,creditor,bigAmount,desc);
+    }
+
 }
