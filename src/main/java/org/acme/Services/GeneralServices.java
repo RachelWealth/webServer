@@ -13,11 +13,11 @@ import java.util.Optional;
 
 public class GeneralServices {
     List<Customer> customers = new ArrayList<>(Arrays.asList(
-            new Customer(1,"Yingli","lastName","cprnoYingli",1000.00,"db58c71a-087c-4dc5-914d-183298af6f7b","customer"),
-            new Customer(2,"Tama","lastName","cprnoTama",1000.00,"4f7c3f75-872c-456a-83ad-0917a0f9b725","customer"),
-            new Customer(3,"Siyuan","lastName","cprnoSiyuan",1000.00,"account_noSiyuan","customer"),
-            new Customer(4,"Jiahe","lastName","cprnoJiahe",1000.00,"account_noJiahe","customer"),
-            new Customer(5,"Xinyi","lastName","cprnoXinyi",1000.00,"account_noXinyi","customer")
+//            new Customer(1,"Yingli","lastName","cprnoYingli",1000.00,"db58c71a-087c-4dc5-914d-183298af6f7b","customer"),
+//            new Customer(2,"Tama","lastName","cprnoTama",1000.00,"4f7c3f75-872c-456a-83ad-0917a0f9b725","customer"),
+//            new Customer(3,"Siyuan","lastName","cprnoSiyuan",1000.00,"account_noSiyuan","customer"),
+//            new Customer(4,"Jiahe","lastName","cprnoJiahe",1000.00,"account_noJiahe","customer"),
+//            new Customer(5,"Xinyi","lastName","cprnoXinyi",1000.00,"account_noXinyi","customer")
         ));
 
         public List<Customer> getAllCustomers(){
@@ -35,7 +35,7 @@ public class GeneralServices {
         }
         public int addNewDtuPayUser(Customer newCustomer) throws BankServiceException_Exception {
 
-            if (getCustomer(newCustomer.getBankAccount()) && callBankAuthService.validAccount(newCustomer.getBankAccount())){
+            if (callBankAuthService.validAccount(newCustomer.getBankAccount())){
                 int nextId = customers.size() + 1;
                 newCustomer.setId(nextId);
                 customers.add(newCustomer);
@@ -67,8 +67,8 @@ public class GeneralServices {
 
         public List<Trade> addTrade(Trade trade) throws BankServiceException_Exception {
             if (callBankAuthService.validAccount(trade.getCustomerBankAccount()) && callBankAuthService.validAccount(trade.getMerchantBankAccount())){
-                Double currentBalanceC = getCustomerAccountBalance(trade.getCustomerBankAccount()) - trade.getBalance();
-                Double currentBalanceM = getCustomerAccountBalance(trade.getMerchantBankAccount())+ trade.getBalance();
+                Double currentBalanceC = getBalance(trade.getCustomerBankAccount()).doubleValue() - trade.getBalance();
+                Double currentBalanceM = getBalance(trade.getMerchantBankAccount()).doubleValue()+ trade.getBalance();
                 Trade newTrade = new Trade(trade.getCustomerBankAccount(),currentBalanceC,trade.getMerchantBankAccount(),currentBalanceM,trade.getBalance());
                 trades.add(newTrade);
                 changeAccountBalance(trade.getCustomerBankAccount(), currentBalanceC);
@@ -90,8 +90,5 @@ public class GeneralServices {
         BigDecimal rt = callBankAuthService.checkBalance(accountId);
         System.out.println(rt);
         return rt;
-    }
-    public void deleteAccount(String accountId) throws BankServiceException_Exception{
-        callBankAuthService.retireBankAccount(accountId);
     }
 }

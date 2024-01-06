@@ -29,6 +29,12 @@ public class Customer {
         this.bankAccount = bankAccount;
         this.userType= userType;
     }
+    public Customer(String firstName,String lastName,String cpr, Double balance){
+        this.cpr = cpr;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.balance = balance;
+    }
 
     public Customer(String firstName,String lastName,String cpr,String bankAccount,String userType){
         this.cpr = cpr;
