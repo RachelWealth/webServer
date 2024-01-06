@@ -30,11 +30,19 @@ public class Customer {
         this.userType= userType;
     }
 
-    public Customer(String name,String cpr,String bankAccount,String userType){
+    public Customer(String firstName,String lastName,String cpr,String bankAccount,String userType){
         this.cpr = cpr;
-        this.name = name;
-
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.bankAccount = bankAccount;
+        this.userType= userType;
+    }
+
+    public Customer(String firstName,String lastName,String cpr,Double balance,String userType){
+        this.cpr = cpr;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.balance = balance;
         this.userType= userType;
     }
 

@@ -15,15 +15,16 @@ public class AllPaymentSteps {
 
     CallBankAuthService callBankAuthService = new CallBankAuthService();
     GeneralController generalController= new GeneralController();
+    public static String accountID;
     @Given("a customer with a bank account with balance {int}")
     public void a_customer_with_a_bank_account_with_balance(Integer int1) throws BankServiceException_Exception {
-        callBankAuthService.CreateAccount();
+        accountID=callBankAuthService.CreateOneAccount(new Customer("Amaya","Joshi","cprAmaya",1000.0,"customer"));
         assertTrue(true, "The bank account is created for the customer");
 
     }
     @And("that the customer is registered with DTU Pay")
     public void that_the_customer_is_registered_with_dtu_pay() throws BankServiceException_Exception {
-        generalController.regDtuPayUser(new Customer("Amaya","cprAmaya","16887","customer"));
+        generalController.regDtuPayUser(new Customer("Amaya","Joshi","cprAmaya","16887","customer"));
         assertTrue(true, "The customer is registered");
     }
     @Given("a merchant with a bank account with balance {int}")
