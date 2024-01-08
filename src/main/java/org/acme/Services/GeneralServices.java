@@ -99,4 +99,7 @@ public class GeneralServices {
     public void deleteAccount(String accoutId) throws BankServiceException_Exception{
         callBankAuthService.deleteAccount(accoutId);
     }
+    public List<String> createAllAccounts() throws BankServiceException_Exception{
+        return callBankAuthService.CreateALLAccount();
+    }
 }

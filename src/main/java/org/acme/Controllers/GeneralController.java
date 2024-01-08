@@ -83,4 +83,12 @@ public class GeneralController {
     public void deleteAccount(String accoundId) throws BankServiceException_Exception{
         generalServices.deleteAccount(accoundId);
     }
+
+
+    @Path("/createallaccounts")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public List<String> createAllAccounts() throws BankServiceException_Exception{
+        return generalServices.createAllAccounts();
+    }
 }
