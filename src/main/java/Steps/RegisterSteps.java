@@ -5,10 +5,11 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.After;
 import org.acme.Controllers.GeneralController;
 import org.acme.Models.Customer;
 import org.acme.Services.CallBankAuthService;
-import org.acme.Services.GeneralServices;
+import org.acme.Services.RegDtuPayUserService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,20 +18,19 @@ public class RegisterSteps {
 
     private Customer user;
     GeneralController generalController = new GeneralController();
-    private GeneralServices generalServices = new GeneralServices();
     CallBankAuthService callBankAuthService = new CallBankAuthService();
+    RegDtuPayUserService regDtuPayUserService = new RegDtuPayUserService();
     private String registrationResult;
     private Boolean bankAccountResult;
     private String bankAccountId;
-
     private String stringValue;
 
     @Before("@register")
     public void setupAccount() {
         try {
-            user = new Customer("sfg", "42523", "43523", 34.00);
+            user = new Customer("ahdl", "asdfbl", "asdfnl", 34.00);
             bankAccountId = callBankAuthService.CreateOneAccount(user);
-            System.out.println(user);
+            System.out.println(user.getFirstName());
             System.out.println(bankAccountId);
         } catch (BankServiceException_Exception e) {
             System.out.println("error setting up: " + e.getMessage());
@@ -66,5 +66,18 @@ public class RegisterSteps {
     public void isGivenAnErrorMessage() {
         assertEquals("false", stringValue);
     }
+
+    @After("@register")
+    public void deleteAccount() {
+        try {
+            System.out.println(user.getFirstName());
+            generalController.deleteAccount(bankAccountId);
+            System.out.println("Just Create Bank account: " + callBankAuthService.validAccount(bankAccountId));
+            //System.out.println(regDtuPayUserService.getAllDtuPayUser());
+        } catch (BankServiceException_Exception e) {
+            System.out.println("error setting up: " + e.getMessage());
+        }
+    }
 }
+
 
