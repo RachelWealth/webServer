@@ -1,10 +1,11 @@
 package Steps;
 
 import dtu.ws.fastmoney.BankServiceException_Exception;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import org.acme.Controllers.GeneralController;
 import org.acme.Models.Customer;
 import org.acme.Services.CallBankAuthService;
@@ -28,7 +29,7 @@ public class CustomerServiceSteps {
     @Before("@queriesAccountBalance")
     public void setupAccount() {
         try {
-            user = new Customer("23542", "34", "23", 34.00,"customer");
+            user = new Customer("NORA", "34", "23", 1899.00,"customer");
             bankAccountId = callBankAuthService.CreateOneAccount(user);
             System.out.println(user);
             System.out.println(bankAccountId);
@@ -54,5 +55,17 @@ public class CustomerServiceSteps {
     public void theAccountBalanceShouldBeDisplayed() {
         Assert.assertNotNull("Account balance is null", accountBalance);
         System.out.println("Account Balance: " + accountBalance);
+    }
+
+    @After("@queriesAccountBalance")
+    public void deleteAccount() {
+        try {
+            System.out.println(user.getFirstName());
+            generalController.deleteAccount(bankAccountId);
+            System.out.println("Just Create Bank account: " + callBankAuthService.validAccount(bankAccountId));
+            //System.out.println(regDtuPayUserService.getAllDtuPayUser());
+        } catch (BankServiceException_Exception e) {
+            System.out.println("error setting up: " + e.getMessage());
+        }
     }
 }
