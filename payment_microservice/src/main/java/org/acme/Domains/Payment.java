@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 /**
  * 
- * @author Yingli
+ * @author Yingli, collaborator: Xinyi Xu
  * @version 1.0
  * 
  */

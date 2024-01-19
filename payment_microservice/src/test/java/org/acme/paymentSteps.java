@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
- * @author Yingli
+ * @author Yingli, collaborator: Xinyi Xu
  */
 public class paymentSteps {
     UUID merchantID;

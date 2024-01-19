@@ -20,7 +20,7 @@ import io.quarkus.logging.Log;
  * This class used for handle all message, 
  * provide corresponding functions to PaymentBroker
  * 
- * @author Yingli
+ * @author Yingli, collaborator: Xinyi Xu
  * @version 1.0
  * 
  */

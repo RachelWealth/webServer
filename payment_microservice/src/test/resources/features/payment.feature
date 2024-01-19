@@ -18,6 +18,7 @@ Feature: Payment
 
 
 ###################################Test refund function###################################
+  # @author  Xinyi Xu, collaborator: Yingli Duan
   Scenario: Create a refund with valid account
     Given merchantID, token
     Given affordedAmount
@@ -25,7 +26,7 @@ Feature: Payment
     When the service create a refund
     Then Ask bank for refund transaction
     Then the refund transaction succeed
-
+   # @author Xinyi Xu, collaborator: Yingli Duan
   Scenario: Refund failed due to unAffordedAmount
     Given merchantID, token
     Given refundId
